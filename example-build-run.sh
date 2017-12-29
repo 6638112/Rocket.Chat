@@ -6,7 +6,7 @@ IFS=$'\n\t'
 # Requires Node.js version 4.x
 # Do not run as root
 
-DEPLOY_DIR=/var/www/rocket.chat
+DEPLOY_DIR=/Users/tiantianwang/Documents/data/rocketchat_build
 
 ### BUILD
 meteor npm install
@@ -28,5 +28,7 @@ NODE_ENV=production \
 PORT=3000 \
 ROOT_URL=http://localhost:3000 \
 MONGO_URL=mongodb://localhost:27017/rocketchat \
-MONGO_OPLOG_URL=mongodb://localhost:27017/local \
+ADMIN_USERNAME=admin \
+ADMIN_PASS=admin \
+ADMIN_EMAIL=admin@example.com \
 node main.js
