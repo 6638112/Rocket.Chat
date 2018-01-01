@@ -79,7 +79,7 @@ RocketChat._setUsername = function(userId, u) {
 };
 
 RocketChat.setUsername = RocketChat.RateLimiter.limitFunction(RocketChat._setUsername, 1, 60000, {
-	[0](userId) {
-		return !userId || !RocketChat.authz.hasPermission(userId, 'edit-other-user-info');
+	[0]() {
+		return false;
 	}
 });
