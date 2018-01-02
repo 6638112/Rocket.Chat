@@ -38,7 +38,9 @@ Template.accountBox.helpers({
 Template.accountBox.events({
 	'click .sidebar__account.active'() {
 		let adminOption;
+		let hasAdminMenu = false;
 		if (RocketChat.authz.hasAtLeastOnePermission(['view-statistics', 'view-room-administration', 'view-user-administration', 'view-privileged-setting' ]) || (RocketChat.AdminBox.getOptions().length > 0)) {
+			hasAdminMenu = true;
 			adminOption = {
 				icon: 'customize',
 				name: t('Administration'),
@@ -86,34 +88,7 @@ Template.accountBox.events({
 									modifier: 'offline'
 								}
 							]
-						},
-						{
-							items: AccountBox.getItems().map(item => {
-								return {
-									icon: item.icon,
-									name: t(item.name),
-									type: 'open',
-									id: item.name,
-									href: item.href,
-									sideNav: item.sideNav
-								};
-							}).concat([
-								adminOption,
-								{
-									icon: 'user',
-									name: t('My_Account'),
-									type: 'open',
-									id: 'account'
-								},
-								{
-									icon: 'sign-out',
-									name: t('Logout'),
-									type: 'open',
-									id: 'logout'
-								}
-							])
 						}
-
 					]
 				}
 			],
@@ -127,6 +102,36 @@ Template.accountBox.events({
 			}
 		};
 
+		if (hasAdminMenu) {
+			config.columns[0].groups.push(
+				{
+					items: AccountBox.getItems().map(item => {
+						return {
+							icon: item.icon,
+							name: t(item.name),
+							type: 'open',
+							id: item.name,
+							href: item.href,
+							sideNav: item.sideNav
+						};
+					}).concat([
+						adminOption,
+						{
+							icon: 'user',
+							name: t('My_Account'),
+							type: 'open',
+							id: 'account'
+						},
+						{
+							icon: 'sign-out',
+							name: t('Logout'),
+							type: 'open',
+							id: 'logout'
+						}
+					])
+				}
+			);
+		}
 		popover.open(config);
 	}
 });
