@@ -4,15 +4,15 @@ ENV RC_VERSION 0.60.0-develop
 
 MAINTAINER buildmaster@rocket.chat
 
-COPY rocket.chat.tgz ./
+COPY Rocket.Chat.tar.gz ./
 
 RUN set -x \
 #  && curl -SLf "https://releases.rocket.chat/${RC_VERSION}/download/" -o rocket.chat.tgz \
 #  && curl -SLf "https://releases.rocket.chat/${RC_VERSION}/asc" -o rocket.chat.tgz.asc \
 #  && gpg --verify rocket.chat.tgz.asc \
  && mkdir -p /app \
- && tar -zxf rocket.chat.tgz -C /app \
- && rm rocket.chat.tgz \
+ && tar -zxf Rocket.Chat.tar.gz -C /app \
+ && rm Rocket.Chat.tar.gz \
  && cd /app/bundle/programs/server \
  && npm install \
  && npm cache clear --force \
@@ -30,7 +30,7 @@ ENV DEPLOY_METHOD=docker \
     MONGO_URL=mongodb://wordpress-mongo.default.svc.cluster.local:27017/rocketchatdb \
     HOME=/tmp \
     PORT=3000 \
-    ROOT_URL=http://40.125.210.216 \
+    ROOT_URL=http://chat.k12mlmq.com:3000 \
     Accounts_AvatarStorePath=/app/uploads
 
 EXPOSE 3000
